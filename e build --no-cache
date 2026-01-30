@@ -1,0 +1,50 @@
+Jan 28 07:25:25 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:25:25.120816057Z" level=info msg="Completed buildkit initialization"
+Jan 28 07:25:25 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:25:25.132232525Z" level=info msg="Daemon has completed initialization"
+Jan 28 07:25:25 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:25:25.132306438Z" level=info msg="API listen on /run/docker.sock"
+Jan 28 07:25:25 ip-172-31-19-251 systemd[1]: Started docker.service - Docker Application Container Engine.
+Jan 28 07:26:35 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:26:35.333786142Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jan 28 07:26:35 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:26:35.453730255Z" level=info msg="sbJoin: gwep4 ''->'35eed60906f7', gwep6 ''->''"
+Jan 28 07:27:26 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:26.962369502Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jan 28 07:27:27 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:27.067136129Z" level=info msg="sbJoin: gwep4 ''->'d1f13bacbbf6', gwep6 ''->''"
+Jan 28 07:27:27 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:27.154522192Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jan 28 07:27:27 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:27.278411836Z" level=info msg="sbJoin: gwep4 ''->'0d19570c5dda', gwep6 ''->''"
+Jan 28 07:27:27 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:27.371500028Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jan 28 07:27:27 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:27.476603331Z" level=info msg="sbJoin: gwep4 ''->'2fcd2bffe8df', gwep6 ''->''"
+Jan 28 07:27:31 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:31.022921489Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jan 28 07:27:31 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:31.128619470Z" level=info msg="sbJoin: gwep4 ''->'28fa8ff115d0', gwep6 ''->''"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:53.686696857Z" level=info msg="Processing signal 'terminated'"
+Jan 28 07:27:53 ip-172-31-19-251 systemd[1]: Stopping docker.service - Docker Application Container Engine...
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:53.687828847Z" level=info msg="stopping event stream following graceful shutdown" error="<nil>" module=libcontainerd namespace=moby
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:53.688315121Z" level=info msg="Daemon shutdown complete"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[175726]: time="2026-01-28T07:27:53.688375667Z" level=info msg="stopping event stream following graceful shutdown" error="context canceled" module=libcontainerd namespace=plugins.moby
+Jan 28 07:27:53 ip-172-31-19-251 systemd[1]: docker.service: Deactivated successfully.
+Jan 28 07:27:53 ip-172-31-19-251 systemd[1]: Stopped docker.service - Docker Application Container Engine.
+Jan 28 07:27:53 ip-172-31-19-251 systemd[1]: docker.service: Consumed 2.489s CPU time.
+Jan 28 07:27:53 ip-172-31-19-251 systemd[1]: Starting docker.service - Docker Application Container Engine...
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.739828451Z" level=info msg="Starting up"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.740457369Z" level=info msg="OTEL tracing is not configured, using no-op tracer provider"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.740554906Z" level=info msg="CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory" dir=/var/run/cdi
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.740582306Z" level=info msg="CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory" dir=/etc/cdi
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.740668933Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.750861328Z" level=info msg="Creating a containerd client" address=/run/containerd/containerd.sock timeout=1m0s
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.759146453Z" level=info msg="Loading containers: start."
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.759185898Z" level=info msg="NRI is disabled"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.759198062Z" level=info msg="Starting daemon with containerd snapshotter integration enabled"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.760614035Z" level=info msg="Restoring containers: start."
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.778564601Z" level=info msg="Deleting nftables IPv4 rules" error="exit status 1"
+Jan 28 07:27:53 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:53.796596993Z" level=info msg="Deleting nftables IPv6 rules" error="exit status 1"
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.240155568Z" level=info msg="Removing stale sandbox" cid=0yj8mf2kh7mi isRestore=false sid=00f420c1f8d6
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.250757882Z" level=warning msg="Failed deleting service host entries to the running container: open : no such file or directory"
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.407975103Z" level=info msg="Loading containers: done."
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.413947167Z" level=info msg="Docker daemon" commit=9c62384 containerd-snapshotter=true storage-driver=overlayfs version=29.2.0
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.413983706Z" level=info msg="Initializing buildkit"
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.481404127Z" level=info msg="Completed buildkit initialization"
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.485207621Z" level=info msg="Daemon has completed initialization"
+Jan 28 07:27:54 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:27:54.485266636Z" level=info msg="API listen on /run/docker.sock"
+Jan 28 07:27:54 ip-172-31-19-251 systemd[1]: Started docker.service - Docker Application Container Engine.
+Jan 28 07:28:02 ip-172-31-19-251 systemd[1]: Stopping docker.service - Docker Application Container Engine...
+Jan 28 07:28:02 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:28:02.209122344Z" level=info msg="Processing signal 'terminated'"
+Jan 28 07:28:02 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:28:02.210326770Z" level=info msg="stopping event stream following graceful shutdown" error="<nil>" module=libcontainerd namespace=moby
+Jan 28 07:28:02 ip-172-31-19-251 dockerd[179877]: time="2026-01-28T07:28:02.210835545Z" level=info msg="Daemon shutdown complete"
+Jan 28 07:28:02 ip-172-31-19-251 systemd[1]: docker.service: Deactivated successfully.
+Jan 28 07:28:02 ip-172-31-19-251 systemd[1]: Stopped docker.service - Docker Application Container Engine.

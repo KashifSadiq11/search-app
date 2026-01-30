@@ -1,0 +1,136 @@
+############################
+# Python / Project Ignored Files
+############################
+############################################################
+# Rec Engine .gitignore (Python / FastAPI / Tooling)
+# Tailored for a backend service with local SQLite dev DB.
+# Keep this curated; remove entries only with intent.
+############################################################
+
+### Runtime Environments / Virtualenvs ###
+venv/
+.venv/
+env/
+.env
+ENV/
+pipenv/
+
+### Secrets & Environment Files ###
+.env
+.env.*
+!.env.example
+!*.env.example
+!*.example
+
+### Python Bytecode / Caches ###
+__pycache__/
+*.py[cod]
+*$py.class
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.nox/
+.tox/
+.hypothesis/
+.benchmarks/
+.pyre/
+
+### Build / Packaging Artifacts ###
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+share/python-wheels/
+pip-wheel-metadata/
+MANIFEST
+*.whl
+*.spec
+*.manifest
+
+### Installer / Pip Logs ###
+pip-log.txt
+pip-delete-this-directory.txt
+
+### Test & Coverage Artifacts ###
+.coverage
+.coverage.*
+coverage.xml
+coverage/
+htmlcov/
+test-results/
+
+### Type-Checking / Static Analysis Config (generated) ###
+pyrightconfig.json
+
+### Documentation (generated) ###
+site/
+docs/_build/
+
+### Jupyter / Notebooks ###
+.ipynb_checkpoints/
+
+### Logs ###
+*.log
+logs/
+
+### Local Databases & Journals (SQLite dev only) ###
+rec_engine.db
+*.sqlite3
+*.db
+*.db-journal
+
+### OS / Editor Noise ###
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+.history/
+.VSCodeCounter/
+
+### FastAPI / Uvicorn ###
+reload.pid
+
+### Temp Scratch Space ###
+tmp/
+temp/
+*.tmp
+*.temp
+
+### Script Artifacts ###
+scripts/__pycache__/
+
+### Cache / Data Snapshots ###
+cache/
+data/
+
+### Machine Learning Models / Artifacts ###
+services/engine/ml_models/
+
+### Security: disallow accidental private keys ###
+*.pem
+*.key
+*.crt
+*.pfx
+
+# Large local data exports (not for Git)
+imported_items.json
+scripts/imported_items.json
+
+### Optional: Comment out if you WANT to commit lockfiles ###
+# Pipenv:
+# Pipfile.lock
+# Poetry:
+# poetry.lock
+# PDM:
+# pdm.lock
+
+############################################################
+# End of file
+############################################################
+

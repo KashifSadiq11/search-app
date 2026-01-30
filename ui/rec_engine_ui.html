@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation Engine - Enhanced</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        header {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 { color: #333; font-size: 28px; }
+
+        .user-section { display: flex; gap: 10px; align-items: center; }
+
+        .user-info {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .content-area {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            min-height: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        input, select, button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .search-bar input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .right-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s;
+            background: #fafafa;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .product-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .product-title:hover { color: #667eea; }
+
+        .product-category {
+            color: #666;
+            font-size: 12px;
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: #667eea;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-shop {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #555;
+            background: #eef2ff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .product-bottom-row{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .product-shop{
+            margin-top: 0;      
+            margin-left: auto;  
+        }
+
+        .stock-status {
+            font-size: 12px;
+            color: #777;
+            opacity: 0.90;
+            margin-top: 4px;
+            display: inline-block;
+        }
+
+        .rating { color: #ffa500; }
+
+
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .action-buttons button {
+            flex: 1;
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .recommendations-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .ml-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .status-card {
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+
+        .status-card.active {
+            border-left-color: #4caf50;
+            background: #f1f8e9;
+        }
+
+        .status-card.inactive {
+            border-left-color: #ff9800;
+            background: #fff3e0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .form-group { margin-bottom: 15px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select { width: 100%; }
+
+        .loading { text-align: center; padding: 40px; color: #666; }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show { display: block; }
+        .toast.success { background: #4caf50; }
+        .toast.error { background: #f44336; }
+        .toast.info { background: #2196f3; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .analytics-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .analytics-card h4 { margin-bottom: 10px; color: #333; }
+
+        .analytics-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .similar-items-modal .products-grid {
+            grid-template-columns: 1fr;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pagination-summary { font-size: 14px; color: #555; }
+
+        .page-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            color: #000;
+        }
+
+        .page-button {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            min-width: 32px;
+            text-align: center;
+            transition: all 0.2s;
+            color: #000;
+        }
+
+        .page-button:hover:not(.disabled):not(.active) { background: #f5f5f5; }
+
+        .page-button.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-color: #667eea;
+        }
+
+        .page-button.disabled { opacity: 1; cursor: default; }
+
+        .page-button.active,
+        .page-button.active:disabled { opacity: 1; cursor: default; }
+
+        /* ---- Shops UI ---- */
+        .shops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .shop-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 16px;
+            background: #fafafa;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            background: white;
+        }
+
+        .shop-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .shop-sub {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .shop-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .shop-pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #3f51b5;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .shops-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🚀 Advanced Recommendation Engine</h1>
+                <div class="user-section">
+                    <div class="user-info" id="userInfo">No user selected</div>
+                    <button onclick="showUserModal()">Select User</button>
+                    <button onclick="createUser()">Create User</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('search', this)">Search Products</button>
+            <button class="tab" onclick="showTab('recommendations', this)">My Recommendations</button>
+            <button class="tab" onclick="showTab('trending', this)">Trending</button>
+            <button class="tab" onclick="showTab('analytics', this)">Analytics</button>
+            <button class="tab" onclick="showTab('admin', this)">Admin</button>
+        </div>
+
+        <div class="content-area" id="contentArea"></div>
+    </div>
+
+    <!-- User Selection Modal -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <h2>Select User</h2>
+            <div id="usersList"></div>
+            <button onclick="closeModal('userModal')" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
+    <!-- Create User Modal -->
+    <div class="modal" id="createUserModal">
+        <div class="modal-content">
+            <h2>Create New User</h2>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" id="newUsername" placeholder="john_doe">
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="newEmail" placeholder="john@example.com">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="submitNewUser()">Create</button>
+                <button onclick="closeModal('createUserModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <h2 id="modalProductTitle">Product Details</h2>
+            <div id="modalProductContent"></div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="closeModal('productModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar Items Modal -->
+    <div class="modal" id="similarModal">
+        <div class="modal-content similar-items-modal">
+            <h2>Similar Items</h2>
+            <div id="similarItemsContent"></div>
+            <button onclick="closeModal('similarModal')" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // ---- Configuration constants (no scattered magic numbers) ----
+        const API_URL = 'http://localhost:8000';
+        const DEFAULT_SEARCH_PAGE_SIZE = 21;
+        const SEARCH_PAGE_SIZE_OPTIONS = [21, 50, 100, 200];
+        const MAX_PAGINATION_VISIBLE_PAGES = 7;
+        const TRENDING_LIMIT = 10;
+        const POPULAR_LIMIT = 10;
+        const TEST_INTERACTION_COUNT = 100;
+
+        // ---- Global state ----
+        let currentUser = null;
+        let allItems = [];
+        let userInteractions = [];
+
+        // Search pagination state
+        let searchPageSize = DEFAULT_SEARCH_PAGE_SIZE;
+        let currentSearchPage = 1;
+        let lastSearchPayload = null;
+        let lastSearchType = 'enhanced';
+        let lastSearchTotal = 0;
+
+        // ✅ NEW: last search data & view state
+        let lastSearchItems = [];
+        let lastSearchShops = [];
+        let currentSearchView = 'products'; // 'products' | 'shops'
+        let selectedShopId = null;
+
+        // Initialize
+        window.onload = () => {
+            showTab('search', document.querySelector('.tab.active'));
+            loadUsers();
+            checkAPIHealth();
+        };
+
+        async function checkAPIHealth() {
+            try {
+                const response = await fetch(`${API_URL}/health/`);
+                if (!response.ok) showToast('API connection failed. Some features may not work.', 'error');
+            } catch (error) {
+                showToast('Cannot connect to API server at ' + API_URL, 'error');
+            }
+        }
+
+        function showToast(message, type = 'info', duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast show ${type}`;
+            setTimeout(() => { toast.classList.remove('show'); }, duration);
+        }
+
+        function showTab(tabName, element) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+
+            switch(tabName) {
+                case 'search': showSearchTab(); break;
+                case 'recommendations': showRecommendationsTab(); break;
+                case 'trending': showTrendingTab(); break;
+                case 'analytics': showAnalyticsTab(); break;
+                case 'admin': showAdminTab(); break;
+            }
+        }
+
+        // Search Tab
+        function showSearchTab() {
+            const pageSizeOptionsHtml = SEARCH_PAGE_SIZE_OPTIONS
+                .map(size => {
+                    const selectedAttr = size === DEFAULT_SEARCH_PAGE_SIZE ? 'selected' : '';
+                    return `<option value="${size}" ${selectedAttr}>${size} / page</option>`;
+                })
+                .join('');
+
+            const content = `
+                <div class="search-bar">
+                    <input type="text" id="searchQuery" placeholder="Search products..." onkeypress="if(event.key==='Enter') performSearch(1)">
+                    <select id="searchType">
+                        <option value="semantic" selected>Semantic Search (ML)</option>
+                        <option value="enhanced">Enhanced Search</option>
+                        <option value="nlp">Natural Language (ML)</option>
+                    </select>
+                    <button onclick="performSearch(1)">Search</button>
+                </div>
+                <div class="filters">
+                    <select id="categoryFilter" onchange="filterProducts()">
+                        <option value="">All Categories</option>
+                        <option value="Mobiles">Mobiles</option>
+                        <option value="Dresses">Dresses</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="In-Ear Headphones">Headphones</option>
+                    </select>
+                    <input type="number" id="maxPrice" placeholder="Max Price" onchange="filterProducts()">
+                    <select id="sortBy" onchange="filterProducts()">
+                        <option value="relevance">Relevance</option>
+                        <option value="price_asc">Price: Low to High</option>
+                        <option value="price_desc">Price: High to Low</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                    <select id="pageSize" onchange="updatePageSize()">
+                        ${pageSizeOptionsHtml}
+                    </select>
+
+                    <div class="right-actions">
+                        <button onclick="loadAllItems()">Show All</button>
+                        <button id="btnProducts" onclick="setSearchView('products')">Products</button>
+                        <button id="btnShops" onclick="setSearchView('shops')" disabled>Shops</button>
+                        <button id="btnClearShop" onclick="clearShopFilter()" disabled>Clear Shop</button>
+                    </div>
+                </div>
+                <div id="searchResults"></div>
+                <div id="searchPagination"></div>
+            `;
+            document.getElementById('contentArea').innerHTML = content;
+
+            // Default load
+            currentSearchView = 'products';
+            selectedShopId = null;
+            lastSearchItems = [];
+            lastSearchShops = [];
+            updateSearchViewButtons();
+            loadAllItems();
+        }
+
+        // ✅ NEW: toggle products/shops view
+        function setSearchView(view) {
+            currentSearchView = view === 'shops' ? 'shops' : 'products';
+            renderSearchView();
+            updateSearchViewButtons();
+        }
+
+        function updateSearchViewButtons() {
+            const btnProducts = document.getElementById('btnProducts');
+            const btnShops = document.getElementById('btnShops');
+            const btnClearShop = document.getElementById('btnClearShop');
+
+            if (btnProducts) btnProducts.disabled = (currentSearchView === 'products');
+            if (btnShops) {
+                const shopsAvailable = Array.isArray(lastSearchShops) && lastSearchShops.length > 0;
+                btnShops.disabled = !shopsAvailable || (currentSearchView === 'shops');
+            }
+            if (btnClearShop) {
+                btnClearShop.disabled = !selectedShopId;
+            }
+        }
+
+        function clearShopFilter() {
+            selectedShopId = null;
+            renderSearchView();
+            updateSearchViewButtons();
+            showToast('Shop filter cleared', 'info');
+        }
+
+        function renderSearchView() {
+            const pagination = document.getElementById('searchPagination');
+            if (pagination) pagination.innerHTML = '';
+
+            if (currentSearchView === 'shops') {
+                renderShops(lastSearchShops, 'searchResults');
+                return;
+            }
+
+            // products view
+            const itemsToShow = applyShopFilter(lastSearchItems);
+            if (itemsToShow.length > 0) {
+                displayProducts(itemsToShow, 'searchResults');
+            } else {
+                // fallback: if no lastSearchItems (like Show All), use allItems
+                const fallback = applyShopFilter(allItems);
+                displayProducts(fallback, 'searchResults');
+            }
+        }
+
+        function applyShopFilter(items) {
+            if (!selectedShopId) return Array.isArray(items) ? items : [];
+            const safe = Array.isArray(items) ? items : [];
+
+            return safe.filter(it => {
+                const seller = it && typeof it === 'object' ? it.seller_info : null;
+                if (!seller || typeof seller !== 'object') return false;
+                const sid = seller.id == null ? null : String(seller.id).trim();
+                return sid && sid === String(selectedShopId);
+            });
+        }
+
+        // Perform Search with pagination
+        async function performSearch(page = 1) {
+            const query = document.getElementById('searchQuery').value;
+            const searchType = document.getElementById('searchType').value;
+            const category = document.getElementById('categoryFilter').value;
+            const maxPrice = document.getElementById('maxPrice').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            if (!query && !category && !maxPrice) {
+                showToast('Please enter search criteria', 'error');
+                return;
+            }
+
+            const pageSizeSelect = document.getElementById('pageSize');
+            if (pageSizeSelect) {
+                const parsedPageSize = parseInt(pageSizeSelect.value, 10);
+                if (Number.isFinite(parsedPageSize) && parsedPageSize > 0) {
+                    searchPageSize = parsedPageSize;
+                }
+            }
+
+            const offset = (page - 1) * searchPageSize;
+
+            const searchData = {
+                query: query || '',
+                limit: searchPageSize,
+                offset: offset
+            };
+
+            if (category) searchData.category = category;
+            if (maxPrice) searchData.max_price = parseFloat(maxPrice);
+            if (sortBy && sortBy !== 'relevance') searchData.sort_by = sortBy;
+
+            lastSearchPayload = searchData;
+            lastSearchType = searchType;
+            currentSearchPage = page;
+
+            selectedShopId = null; // reset shop filter on new search
+            document.getElementById('searchResults').innerHTML = '<div class="loading">Searching...</div>';
+            document.getElementById('searchPagination').innerHTML = '';
+
+            try {
+                const endpoint =
+                    searchType === 'semantic' ? 'semantic' :
+                    searchType === 'nlp' ? 'nlp-enhanced' :
+                    'enhanced';
+
+                const response = await fetch(`${API_URL}/search/${endpoint}/`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(searchData)
+                });
+
+                if (!response.ok) throw new Error('Search failed');
+
+                const data = await response.json();
+
+                const items = Array.isArray(data.items) ? data.items : [];
+                const shops = Array.isArray(data.shops) ? data.shops : [];
+                const total = typeof data.total === 'number' ? data.total : items.length;
+
+                // ✅ store last results
+                lastSearchItems = items;
+                lastSearchShops = shops;
+                lastSearchTotal = total;
+
+                // semantic search: show shops button enabled if shops exist
+                // default to products view after search
+                currentSearchView = 'products';
+
+                displayProducts(applyShopFilter(items), 'searchResults');
+                renderSearchPagination(total, currentSearchPage, searchPageSize);
+                updateSearchViewButtons();
+
+                // message changes depending on semantic shops availability
+                if (shops.length > 0) {
+                    showToast(`Found ${total} products • ${shops.length} shops`, 'success');
+                } else {
+                    showToast(`Found ${total} products`, 'success');
+                }
+
+            } catch (error) {
+                console.error('Search error:', error);
+                document.getElementById('searchResults').innerHTML =
+                    '<div class="error">Search failed. Please try again.</div>';
+                document.getElementById('searchPagination').innerHTML = '';
+                lastSearchItems = [];
+                lastSearchShops = [];
+                updateSearchViewButtons();
+                showToast('Search failed', 'error');
+            }
+        }
+
+        function updatePageSize() {
+            const select = document.getElementById('pageSize');
+            if (!select) return;
+
+            const newSize = parseInt(select.value, 10);
+            if (!Number.isFinite(newSize) || newSize <= 0) return;
+
+            searchPageSize = newSize;
+            currentSearchPage = 1;
+
+            if (lastSearchPayload) performSearch(1);
+        }
+
+        function renderSearchPagination(total, page, pageSize) {
+            const container = document.getElementById('searchPagination');
+            if (!container) return;
+
+            if (!total || total <= pageSize) {
+                container.innerHTML = '';
+                return;
+            }
+
+            const totalPages = Math.ceil(total / pageSize);
+            const startIndex = (page - 1) * pageSize + 1;
+            const endIndex = Math.min(page * pageSize, total);
+
+            const maxButtons = MAX_PAGINATION_VISIBLE_PAGES;
+            const halfWindow = Math.floor(maxButtons / 2);
+
+            let startPage = Math.max(1, page - halfWindow);
+            let endPage = startPage + maxButtons - 1;
+
+            if (endPage > totalPages) {
+                endPage = totalPages;
+                startPage = Math.max(1, endPage - maxButtons + 1);
+            }
+
+            const pageButtons = [];
+
+            const prevDisabled = page <= 1;
+            pageButtons.push(`
+                <button class="page-button ${prevDisabled ? 'disabled' : ''}"
+                    ${prevDisabled ? 'disabled' : `onclick="goToSearchPage(${page - 1})"`}>‹</button>
+            `);
+
+            if (startPage > 1) {
+                pageButtons.push(`
+                    <button class="page-button ${page === 1 ? 'active' : ''}" onclick="goToSearchPage(1)">1</button>
+                `);
+                if (startPage > 2) {
+                    pageButtons.push(`<button class="page-button disabled" disabled>…</button>`);
+                }
+            }
+
+            for (let p = startPage; p <= endPage; p++) {
+                const isActive = p === page;
+                pageButtons.push(`
+                    <button class="page-button ${isActive ? 'active' : ''}"
+                        ${isActive ? 'disabled' : `onclick="goToSearchPage(${p})"`}>${p}</button>
+                `);
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    pageButtons.push(`<button class="page-button disabled" disabled>…</button>`);
+                }
+                pageButtons.push(`
+                    <button class="page-button ${page === totalPages ? 'active' : ''}"
+                        onclick="goToSearchPage(${totalPages})">${totalPages}</button>
+                `);
+            }
+
+            const nextDisabled = page >= totalPages;
+            pageButtons.push(`
+                <button class="page-button ${nextDisabled ? 'disabled' : ''}"
+                    ${nextDisabled ? 'disabled' : `onclick="goToSearchPage(${page + 1})"`}>›</button>
+            `);
+
+            container.innerHTML = `
+                <div class="pagination-controls">
+                    <div class="pagination-summary">
+                        Page ${page} of ${totalPages}
+                        &nbsp;|&nbsp; Showing ${startIndex}–${endIndex} of ${total}
+                    </div>
+                    <div class="page-buttons">${pageButtons.join('')}</div>
+                </div>
+            `;
+        }
+
+        function goToSearchPage(page) {
+            if (!lastSearchPayload) return;
+
+            if (page < 1) page = 1;
+
+            const totalPages = lastSearchTotal ? Math.ceil(lastSearchTotal / searchPageSize) : 1;
+            if (page > totalPages) page = totalPages;
+
+            performSearch(page);
+        }
+
+        // Load All Items (Show All)
+        async function loadAllItems() {
+            const container = document.getElementById('searchResults');
+            if (container) container.innerHTML = '<div class="loading">Loading products...</div>';
+
+            const pagination = document.getElementById('searchPagination');
+            if (pagination) pagination.innerHTML = '';
+
+            // reset search state
+            lastSearchPayload = null;
+            lastSearchType = 'enhanced';
+            lastSearchTotal = 0;
+            lastSearchItems = [];
+            lastSearchShops = [];
+            currentSearchView = 'products';
+            selectedShopId = null;
+            updateSearchViewButtons();
+
+            try {
+                const response = await fetch(`${API_URL}/items/`);
+                if (!response.ok) throw new Error('Failed to load items');
+
+                allItems = await response.json();
+                displayProducts(allItems, 'searchResults');
+                showToast(`Loaded ${allItems.length} products`, 'success');
+            } catch (error) {
+                console.error('Error loading items:', error);
+                if (container) {
+                    container.innerHTML =
+                        '<div class="error">Failed to load products. Please check your connection.</div>';
+                }
+            }
+        }
+
+        // Filter Products (client-side on allItems)
+        function filterProducts() {
+            if (allItems.length === 0) {
+                loadAllItems();
+                return;
+            }
+
+            // if user has a last search result, filtering should apply to that view,
+            // but your original logic is "filter allItems" so we keep it unchanged.
+            const category = document.getElementById('categoryFilter').value;
+            const maxPriceValue = document.getElementById('maxPrice').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            const maxPrice = maxPriceValue === '' ? null : parseFloat(maxPriceValue);
+
+            let filtered = allItems.filter(item => {
+                if (category && item.category !== category) return false;
+                if (maxPrice !== null && typeof item.price === 'number' && item.price > maxPrice) return false;
+                return true;
+            });
+
+            switch(sortBy) {
+                case 'price_asc':
+                    filtered.sort((a, b) => (a.price || 0) - (b.price || 0));
+                    break;
+                case 'price_desc':
+                    filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
+                    break;
+                case 'rating':
+                    filtered.sort((a, b) => (b.product_rating || 0) - (a.product_rating || 0));
+                    break;
+            }
+
+            // reset shop filter when client-side filtering is used
+            selectedShopId = null;
+            currentSearchView = 'products';
+            updateSearchViewButtons();
+
+            displayProducts(filtered, 'searchResults');
+
+            const pagination = document.getElementById('searchPagination');
+            if (pagination) pagination.innerHTML = '';
+        }
+
+        function displayProducts(items, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="info">No products found</div>';
+                return;
+            }
+
+            const html = `
+                <div class="products-grid">
+                    ${items.map(item => {
+                        const price = typeof item.price === 'number' ? item.price : 0;
+                        const rating = typeof item.product_rating === 'number' ? item.product_rating : 0;
+                        const inStock = typeof item.in_stock === 'boolean' ? item.in_stock : false;
+                        const seller = item && typeof item === 'object' ? item.seller_info : null;   
+                        const shopName =
+                            seller && typeof seller === 'object'
+                                ? (seller.name || seller.userName || seller.user_name || '')
+                                : '';
+
+                        return `
+                            <div class="product-card">
+                                <div class="product-title" onclick="viewProduct('${item.id}')">
+                                    ${item.title || 'Unnamed Product'}
+                                </div>
+                                <div class="product-category">${item.category || 'Uncategorized'}</div>
+                                <div class="product-price">Rs.${price}</div>
+                                <div class="product-meta">
+                                <span class="rating">★ ${rating.toFixed(1)}</span>
+                            </div>
+                            <div class="product-bottom-row">
+                                <span class="stock-status">${inStock ? '✓ In Stock' : '✗ Out of Stock'}</span>
+                                ${shopName ? `<div class="product-shop">${escapeHtml(shopName)}</div>` : ''}
+                            </div>
+                            <div class="action-buttons">
+                                    <button onclick="viewProduct('${item.id}')">View</button>
+                                    <button onclick="likeProduct('${item.id}')">Like</button>
+                                    <button onclick="getSimilarItems('${item.id}')">Similar</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        // ✅ NEW: render shops list from semantic response
+        function renderShops(shops, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            if (!Array.isArray(shops) || shops.length === 0) {
+                container.innerHTML = `
+                    <div class="info">
+                        No shops available for this result.<br>
+                        Tip: Shops are returned by <strong>Semantic Search</strong>.
+                    </div>
+                `;
+                return;
+            }
+
+            const html = `
+                <div class="info">
+                    Showing ${shops.length} shops (click a shop to filter products)
+                </div>
+                <div class="shops-grid">
+                    ${shops.map(s => {
+                        const title = s.name || s.user_name || 'Unnamed Shop';
+                        const locationParts = [s.city, s.zone, s.province].filter(Boolean);
+                        const location = locationParts.length ? locationParts.join(', ') : 'Location N/A';
+                        const count = typeof s.matched_items_count === 'number' ? s.matched_items_count : 0;
+
+                        return `
+                            <div class="shop-card" onclick="selectShop('${s.seller_id}')">
+                                <div class="shop-title">${escapeHtml(title)}</div>
+                                <div class="shop-sub">${escapeHtml(location)}</div>
+                                <div class="shop-meta">
+                                    <span class="shop-pill">${count} items</span>
+                                    <span>${escapeHtml(s.business_type || '')}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function selectShop(sellerId) {
+            selectedShopId = sellerId;
+            currentSearchView = 'products';
+            updateSearchViewButtons();
+
+            const filtered = applyShopFilter(lastSearchItems);
+            displayProducts(filtered, 'searchResults');
+
+            showToast(`Filtered by shop ${sellerId}`, 'success');
+        }
+
+        function escapeHtml(value) {
+            const str = value == null ? '' : String(value);
+            return str
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        // View Product Details
+        async function viewProduct(itemId) {
+            recordInteraction(itemId, 'view');
+
+            try {
+                const response = await fetch(`${API_URL}/items/${itemId}/`);
+                if (!response.ok) throw new Error('Failed to load product');
+
+                const item = await response.json();
+
+                const price = typeof item.price === 'number' ? item.price : 0;
+                const rating = typeof item.product_rating === 'number' ? item.product_rating : 0;
+                const inStock = typeof item.in_stock === 'boolean' ? item.in_stock : false;
+
+                // ✅ FIX: define shopName here too
+                const seller = item && typeof item === 'object' ? item.seller_info : null;
+                const shopName =
+                    seller && typeof seller === 'object'
+                        ? (seller.name || seller.userName || seller.user_name || '')
+                        : '';
+
+                const modalContent = `
+                    <div style="display: grid; gap: 15px;">
+                        <div><strong>Category:</strong> ${item.category || 'N/A'}</div>
+                        <div><strong>Price:</strong> Rs.${price}</div>
+                        <div><strong>Rating:</strong> ★ ${rating.toFixed(1)}</div>
+                        <span class="stock-status">${inStock ? '✓ In Stock' : '✗ Out of Stock'}</span>
+                          ${shopName ? `<div class="product-shop">${escapeHtml(shopName)}</div>` : ''}
+                        <div><strong>Item ID:</strong> ${item.id}</div>
+                        ${item.description ? `<div><strong>Description:</strong> ${escapeHtml(item.description)}</div>` : ''}
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button onclick="likeProduct('${item.id}')">Like This Product</button>
+                        <button onclick="recordInteraction('${item.id}', 'purchase'); showToast('Purchase recorded!', 'success')">Purchase</button>
+                        <button onclick="getSimilarItems('${item.id}')">Find Similar</button>
+                    </div>
+                `;
+
+                document.getElementById('modalProductTitle').textContent = item.title || 'Product Details';
+                document.getElementById('modalProductContent').innerHTML = modalContent;
+                document.getElementById('productModal').classList.add('active');
+
+            } catch (error) {
+                console.error('Error viewing product:', error);
+                showToast('Failed to load product details', 'error');
+            }
+        }
+
+        function likeProduct(itemId) {
+            if (!currentUser) {
+                showToast('Please select a user first', 'error');
+                return;
+            }
+            recordInteraction(itemId, 'like');
+            showToast('Product liked!', 'success');
+        }
+
+        async function getSimilarItems(itemId) {
+            if (!currentUser) {
+                showToast('Please select a user first', 'error');
+                return;
+            }
+
+            document.getElementById('similarItemsContent').innerHTML = '<div class="loading">Finding similar items...</div>';
+            document.getElementById('similarModal').classList.add('active');
+
+            try {
+                const response = await fetch(`${API_URL}/items/${itemId}/similar/enhanced/?limit=10`);
+                if (!response.ok) throw new Error('Failed to load similar items');
+
+                const data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    const html = `
+                        <div class="info">Found ${data.items.length} similar items</div>
+                        <div class="products-grid">
+                            ${data.items.map(sim => {
+                                const simPrice = typeof sim.item.price === 'number' ? sim.item.price : 0;
+                                const simScore = typeof sim.similarity === 'number'
+                                    ? (sim.similarity * 100).toFixed(0)
+                                    : 'N/A';
+
+                                return `
+                                    <div class="product-card">
+                                        <div class="product-title" onclick="viewProduct('${sim.item.id}')">${sim.item.title}</div>
+                                        <div class="product-category">${sim.item.category}</div>
+                                        <div class="product-price">Rs.${simPrice}</div>
+                                        <div style="color: #666; font-size: 12px; margin: 10px 0;">
+                                            Similarity: ${simScore}%
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button onclick="viewProduct('${sim.item.id}')">View</button>
+                                            <button onclick="likeProduct('${sim.item.id}')">Like</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                    document.getElementById('similarItemsContent').innerHTML = html;
+                } else {
+                    document.getElementById('similarItemsContent').innerHTML =
+                        '<div class="info">No similar items found</div>';
+                }
+            } catch (error) {
+                console.error('Error getting similar items:', error);
+                document.getElementById('similarItemsContent').innerHTML =
+                    '<div class="error">Failed to load similar items</div>';
+            }
+        }
+
+        // Recommendations Tab
+        async function showRecommendationsTab() {
+            if (!currentUser) {
+                document.getElementById('contentArea').innerHTML =
+                    '<div class="error">Please select a user first to see personalized recommendations</div>';
+                return;
+            }
+
+            const content = `
+                <h2>Personalized Recommendations for ${currentUser.username}</h2>
+                <div class="filters">
+                    <select id="algorithm" onchange="loadRecommendations()">
+                        <option value="auto">Auto Select</option>
+                        <option value="collaborative">Collaborative Filtering</option>
+                        <option value="content">Content-Based</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="deep_learning">Deep Learning</option>
+                    </select>
+                    <button onclick="loadRecommendations()">Refresh</button>
+                </div>
+                <div id="recommendationsResults" class="loading">Loading recommendations...</div>
+                <div class="recommendations-section">
+                    <h3>Your Recent Interactions</h3>
+                    <div id="recentInteractions" class="loading">Loading interactions...</div>
+                </div>
+            `;
+            document.getElementById('contentArea').innerHTML = content;
+            loadRecommendations();
+            loadUserInteractions();
+        }
+
+        async function loadRecommendations() {
+            if (!currentUser) return;
+
+            const algorithm = document.getElementById('algorithm')?.value || 'auto';
+            const container = document.getElementById('recommendationsResults');
+
+            try {
+                const response = await fetch(`${API_URL}/recommend/enhanced/`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        user_id: currentUser.id,
+                        algorithm: algorithm,
+                        limit: 20
+                    })
+                });
+
+                if (!response.ok) throw new Error('Recommendation request failed');
+
+                const data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    const html = `
+                        <div class="badge">Algorithm: ${data.algorithm_used || algorithm}</div>
+                        <div class="products-grid" style="margin-top: 20px;">
+                            ${data.items.map(rec => {
+                                const recPrice = typeof rec.item.price === 'number' ? rec.item.price : 0;
+                                const recScore = typeof rec.score === 'number' ? rec.score.toFixed(2) : 'N/A';
+
+                                return `
+                                    <div class="product-card">
+                                        <div class="product-title" onclick="viewProduct('${rec.item.id}')">${rec.item.title}</div>
+                                        <div class="product-category">${rec.item.category}</div>
+                                        <div class="product-price">Rs.${recPrice}</div>
+                                        <div style="color: #666; font-size: 12px; margin: 10px 0;">
+                                            <strong>Score:</strong> ${recScore}<br>
+                                            <strong>Reason:</strong> ${escapeHtml(rec.reason || 'Personalized for you')}
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button onclick="viewProduct('${rec.item.id}')">View</button>
+                                            <button onclick="recordInteraction('${rec.item.id}', 'purchase'); showToast('Purchase recorded!', 'success')">Buy</button>
+                                            <button onclick="likeProduct('${rec.item.id}')">Like</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                    container.innerHTML = html;
+                    showToast(`Loaded ${data.items.length} recommendations`, 'success');
+                } else {
+                    container.innerHTML = `
+                        <div class="info">
+                            No personalized recommendations available yet.<br>
+                            Try interacting with some products first (view, like, or purchase).
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading recommendations:', error);
+                container.innerHTML = `
+                    <div class="error">
+                        Failed to load recommendations.<br>
+                        Try viewing, liking, or purchasing some items first.
+                    </div>
+                `;
+            }
+        }
+
+        async function loadUserInteractions() {
+            if (!currentUser) return;
+
+            try {
+                const response = await fetch(`${API_URL}/users/${currentUser.id}/interactions/?limit=10`);
+                if (!response.ok) throw new Error('Failed to load interactions');
+
+                const interactions = await response.json();
+
+                if (interactions.length > 0) {
+                    const html = `
+                        <div style="display: grid; gap: 10px;">
+                            ${interactions.map(int => {
+                                const rating = typeof int.rating === 'number' ? int.rating.toFixed(1) : 'N/A';
+                                const ts = int.timestamp ? new Date(int.timestamp).toLocaleDateString() : '';
+
+                                return `
+                                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                        <strong>${escapeHtml(int.item_title || ('Item ' + int.item_id))}</strong> -
+                                        ${escapeHtml(int.interaction_type)} -
+                                        Rating: ${rating} -
+                                        ${ts}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                    document.getElementById('recentInteractions').innerHTML = html;
+                } else {
+                    document.getElementById('recentInteractions').innerHTML =
+                        '<div class="info">No interactions yet</div>';
+                }
+            } catch (error) {
+                console.error('Error loading interactions:', error);
+                document.getElementById('recentInteractions').innerHTML =
+                    '<div class="error">Failed to load interactions</div>';
+            }
+        }
+
+        // Trending Tab
+        async function showTrendingTab() {
+            const content = `
+                <h2>Trending & Popular Products</h2>
+                <div class="filters">
+                    <select id="trendingPeriod" onchange="loadTrending()">
+                        <option value="1">Last 24 Hours</option>
+                        <option value="7" selected>Last 7 Days</option>
+                        <option value="30">Last 30 Days</option>
+                    </select>
+                    <button onclick="loadTrending()">Refresh</button>
+                </div>
+                <div id="trendingResults" class="loading">Loading trending items...</div>
+                <div class="recommendations-section">
+                    <h3>Most Popular Items</h3>
+                    <div id="popularResults" class="loading">Loading popular items...</div>
+                </div>
+            `;
+            document.getElementById('contentArea').innerHTML = content;
+            loadTrending();
+            loadPopular();
+        }
+
+        async function loadTrending() {
+            const periodSelect = document.getElementById('trendingPeriod');
+            const period = periodSelect ? periodSelect.value : '7';
+            const container = document.getElementById('trendingResults');
+
+            if (container) container.innerHTML = '<div class="loading">Loading trending items...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/analytics/trending-items/?window_days=${period}&limit=${TRENDING_LIMIT}`);
+                if (!response.ok) throw new Error('Failed to load trending');
+
+                const data = await response.json();
+
+                if (data.trending_items && data.trending_items.length > 0) {
+                    const items = data.trending_items.map(t => ({
+                        ...t.item,
+                        interaction_count: t.interaction_count,
+                        trend_score: t.trend_score
+                    }));
+
+                    const html = `
+                        <div class="products-grid">
+                            ${items.map((item, index) => {
+                                const price = typeof item.price === 'number' ? item.price : 0;
+                                const trendScore = typeof item.trend_score === 'number' ? item.trend_score.toFixed(2) : 'N/A';
+                                const interactions = typeof item.interaction_count === 'number' ? item.interaction_count : 0;
+
+                                return `
+                                    <div class="product-card">
+                                        <div style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
+                                            #${index + 1}
+                                        </div>
+                                        <div class="product-title" onclick="viewProduct('${item.id}')">${escapeHtml(item.title)}</div>
+                                        <div class="product-category">${escapeHtml(item.category)}</div>
+                                        <div class="product-price">Rs.${price}</div>
+                                        <div style="color: #666; font-size: 12px; margin: 10px 0;">
+                                            ${interactions} interactions<br>
+                                            Trend Score: ${trendScore}
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button onclick="viewProduct('${item.id}')">View</button>
+                                            <button onclick="likeProduct('${item.id}')">Like</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                    container.innerHTML = html;
+                } else {
+                    container.innerHTML =
+                        '<div class="info">No trending items found. Try generating some test data first.</div>';
+                }
+            } catch (error) {
+                console.error('Error loading trending:', error);
+                if (container) container.innerHTML = '<div class="error">Failed to load trending items</div>';
+            }
+        }
+
+        async function loadPopular() {
+            const container = document.getElementById('popularResults');
+            if (container) container.innerHTML = '<div class="loading">Loading popular items...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/popular/?limit=${POPULAR_LIMIT}`);
+                if (response.ok) {
+                    const items = await response.json();
+                    displayProducts(items, 'popularResults');
+                } else if (response.status === 404) {
+                    if (container) container.innerHTML = '<div class="info">Popular items endpoint is not available.</div>';
+                } else {
+                    if (container) container.innerHTML = '<div class="info">Unable to load popular items</div>';
+                }
+            } catch (error) {
+                console.error('Error loading popular:', error);
+                if (container) container.innerHTML = '<div class="info">Popular items feature not available</div>';
+            }
+        }
+
+        // Analytics Tab
+        async function showAnalyticsTab() {
+            const content = `
+                <h2>System Analytics</h2>
+                <div class="analytics-grid" id="analyticsStats">
+                    <div class="analytics-card">
+                        <h4>Loading...</h4>
+                        <div class="value">-</div>
+                    </div>
+                </div>
+                <div class="recommendations-section">
+                    <h3>User Activity</h3>
+                    <div id="userActivity" class="loading">Loading user activity...</div>
+                </div>
+                <div class="recommendations-section">
+                    <h3>Category Performance</h3>
+                    <div id="categoryPerformance" class="loading">Loading category data...</div>
+                </div>
+            `;
+            document.getElementById('contentArea').innerHTML = content;
+            loadAnalytics();
+        }
+
+        async function loadAnalytics() {
+            try {
+                const [users, items, interactions] = await Promise.all([
+                    fetch(`${API_URL}/users/`).then(r => r.json()),
+                    fetch(`${API_URL}/items/`).then(r => r.json()),
+                    fetch(`${API_URL}/analytics/stats/`).then(r => r.json()).catch(() => null)
+                ]);
+
+                const statsHtml = `
+                    <div class="analytics-card"><h4>Total Users</h4><div class="value">${users.length}</div></div>
+                    <div class="analytics-card"><h4>Total Products</h4><div class="value">${items.length}</div></div>
+                    <div class="analytics-card"><h4>Total Interactions</h4><div class="value">${interactions?.total_interactions || 0}</div></div>
+                    <div class="analytics-card"><h4>Avg Rating</h4><div class="value">${interactions?.average_rating?.toFixed(2) || 'N/A'}</div></div>
+                `;
+                document.getElementById('analyticsStats').innerHTML = statsHtml;
+
+                const activityResponse = await fetch(`${API_URL}/analytics/user-activity/`);
+                if (activityResponse.ok) {
+                    const activity = await activityResponse.json();
+                    const activeUsers = Array.isArray(activity.active_users) ? activity.active_users : [];
+                    if (activeUsers.length > 0) {
+                        const activityHtml = `
+                            <div style="display: grid; gap: 10px;">
+                                ${activeUsers.slice(0, 5).map(user => {
+                                    const lastInteraction = user.last_interaction ? new Date(user.last_interaction).toLocaleDateString() : '';
+                                    const count = typeof user.interaction_count === 'number' ? user.interaction_count : 0;
+
+                                    return `
+                                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                            <strong>${escapeHtml(user.username)}</strong> -
+                                            ${count} interactions -
+                                            Last active: ${lastInteraction}
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                        document.getElementById('userActivity').innerHTML = activityHtml;
+                    } else {
+                        document.getElementById('userActivity').innerHTML = '<div class="info">No user activity yet</div>';
+                    }
+                }
+
+                const categoryResponse = await fetch(`${API_URL}/analytics/category-performance/`);
+                if (categoryResponse.ok) {
+                    const categories = await categoryResponse.json();
+                    const categoryList = Array.isArray(categories.categories) ? categories.categories : [];
+
+                    if (categoryList.length > 0) {
+                        const categoryHtml = `
+                            <div style="display: grid; gap: 10px;">
+                                ${categoryList.map(cat => {
+                                    const interactionCount = typeof cat.interaction_count === 'number' ? cat.interaction_count : 0;
+                                    const avgRating = typeof cat.avg_rating === 'number' ? cat.avg_rating.toFixed(2) : 'N/A';
+
+                                    return `
+                                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                            <strong>${escapeHtml(cat.category)}</strong> -
+                                            ${interactionCount} interactions -
+                                            Avg Rating: ${avgRating}
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                        document.getElementById('categoryPerformance').innerHTML = categoryHtml;
+                    } else {
+                        document.getElementById('categoryPerformance').innerHTML = '<div class="info">No category data yet</div>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+                showToast('Some analytics failed to load', 'error');
+            }
+        }
+
+        // Admin Tab
+        async function showAdminTab() {
+            const content = `
+                <h2>Admin Dashboard</h2>
+                <div class="section-title">
+                    ML System Status
+                    <button onclick="checkMLStatus()">Refresh Status</button>
+                </div>
+                <div id="mlStatus" class="ml-status"></div>
+                <div class="section-title" style="margin-top: 30px;">Actions</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                    <button onclick="triggerTraining()">Train ML Models</button>
+                    <button onclick="generateTestData()">Generate Test Data</button>
+                    <button onclick="clearCache()">Clear Cache</button>
+                    <button onclick="exportData()">Export Data</button>
+                </div>
+                <div id="adminMessages"></div>
+                <div class="recommendations-section">
+                    <h3>Training History</h3>
+                    <div id="trainingHistory"></div>
+                </div>
+            `;
+            document.getElementById('contentArea').innerHTML = content;
+            checkMLStatus();
+            loadTrainingHistory();
+        }
+
+        async function checkMLStatus() {
+            try {
+                const response = await fetch(`${API_URL}/ml/status/`);
+                if (!response.ok) throw new Error('Failed to get ML status');
+
+                const data = await response.json();
+                const engines = data.engines || {};
+
+                const engineCards = Object.entries(engines).map(([engine, status]) => `
+                    <div class="status-card ${status ? 'active' : 'inactive'}">
+                        <strong>${engine.replace(/_/g, ' ').toUpperCase()}</strong><br>
+                        ${status ? '✓ Active' : '✗ Inactive'}
+                    </div>
+                `).join('');
+
+                const statusHtml = `
+                    <div class="status-card ${data.ml_enabled ? 'active' : 'inactive'}">
+                        <strong>ML System</strong><br>
+                        ${data.ml_enabled ? '✓ Enabled' : '✗ Disabled'}
+                    </div>
+                    ${engineCards}
+                    <div class="status-card">
+                        <strong>Models Directory</strong><br>
+                        ${data.models_directory ? '✓ Present' : '✗ Missing'}
+                    </div>
+                `;
+                document.getElementById('mlStatus').innerHTML = statusHtml;
+            } catch (error) {
+                console.error('Error checking ML status:', error);
+                document.getElementById('mlStatus').innerHTML = '<div class="error">Failed to load ML status</div>';
+            }
+        }
+
+        async function loadTrainingHistory() {
+            try {
+                const response = await fetch(`${API_URL}/ml/training-history/`);
+                if (response.ok) {
+                    const history = await response.json();
+                    if (history.length > 0) {
+                        const html = `
+                            <div style="display: grid; gap: 10px;">
+                                ${history.slice(0, 5).map(entry => {
+                                    const ts = entry.timestamp ? new Date(entry.timestamp).toLocaleString() : '';
+                                    const metrics = entry.metrics || {};
+                                    return `
+                                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                                            <strong>${escapeHtml(entry.model)}</strong> -
+                                            ${ts} -
+                                            Status: ${escapeHtml(entry.status)} -
+                                            Metrics: ${escapeHtml(JSON.stringify(metrics))}
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                        document.getElementById('trainingHistory').innerHTML = html;
+                    } else {
+                        document.getElementById('trainingHistory').innerHTML = '<div class="info">No training history yet</div>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading training history:', error);
+            }
+        }
+
+        // User Management
+        async function loadUsers() {
+            try {
+                const response = await fetch(`${API_URL}/users/`);
+                if (!response.ok) throw new Error('Failed to load users');
+
+                const users = await response.json();
+
+                const html = users.map(user => {
+                    const createdAt = user.created_at ? new Date(user.created_at).toLocaleDateString() : '';
+                    return `
+                        <div style="padding: 10px; border: 1px solid #ddd; margin: 5px 0; border-radius: 8px; cursor: pointer; transition: background 0.3s;"
+                             onmouseover="this.style.background='#f0f0f0'"
+                             onmouseout="this.style.background='white'"
+                             onclick="selectUser('${user.id}', '${escapeHtml(user.username)}')">
+                            <strong>${escapeHtml(user.username)}</strong> - ${escapeHtml(user.email)}
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                ID: ${escapeHtml(user.id)} ${createdAt ? `| Created: ${createdAt}` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                document.getElementById('usersList').innerHTML = html || '<p>No users found. Create one to get started!</p>';
+            } catch (error) {
+                console.error('Error loading users:', error);
+                document.getElementById('usersList').innerHTML = '<div class="error">Failed to load users</div>';
+            }
+        }
+
+        function selectUser(userId, username) {
+            currentUser = { id: userId, username: username };
+            document.getElementById('userInfo').innerHTML = `User: ${escapeHtml(username)}`;
+            closeModal('userModal');
+            showToast(`Selected user: ${username}`, 'success');
+
+            if (document.querySelector('.tab.active').textContent.includes('Recommendations')) {
+                showRecommendationsTab();
+            }
+        }
+
+        function showUserModal() {
+            document.getElementById('userModal').classList.add('active');
+            loadUsers();
+        }
+
+        function createUser() {
+            document.getElementById('createUserModal').classList.add('active');
+        }
+
+        async function submitNewUser() {
+            const username = document.getElementById('newUsername').value.trim();
+            const email = document.getElementById('newEmail').value.trim();
+
+            if (!username || !email) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/users/`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username, email })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Failed to create user');
+                }
+
+                const user = await response.json();
+                selectUser(user.id, user.username);
+                closeModal('createUserModal');
+                showToast('User created successfully!', 'success');
+
+                document.getElementById('newUsername').value = '';
+                document.getElementById('newEmail').value = '';
+            } catch (error) {
+                console.error('Error creating user:', error);
+                showToast(error.message || 'Failed to create user', 'error');
+            }
+        }
+
+        // Record Interaction
+        async function recordInteraction(itemId, type) {
+            if (!currentUser) {
+                showToast('Please select a user first', 'error');
+                return;
+            }
+
+            try {
+                const rating =
+                    type === 'purchase' ? 5.0 :
+                    type === 'like' ? 4.0 :
+                    type === 'view' ? 3.0 :
+                    2.5;
+
+                const response = await fetch(`${API_URL}/interactions/`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        user_id: currentUser.id,
+                        item_id: itemId,
+                        interaction_type: type,
+                        rating: rating
+                    })
+                });
+
+                if (!response.ok) throw new Error('Failed to record interaction');
+
+                userInteractions.push({ item_id: itemId, type: type, timestamp: new Date() });
+            } catch (error) {
+                console.error('Error recording interaction:', error);
+            }
+        }
+
+        async function triggerTraining() {
+            if (!confirm('Start training ML models? This may take a few moments.')) return;
+
+            document.getElementById('adminMessages').innerHTML =
+                '<div class="info">Training models... Please wait...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/ml/train-models/`, { method: 'POST' });
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Training failed');
+                }
+
+                const data = await response.json();
+                document.getElementById('adminMessages').innerHTML =
+                    `<div class="success">${escapeHtml(data.message || 'Training completed successfully!')}</div>`;
+                showToast('Training completed!', 'success');
+
+                checkMLStatus();
+                loadTrainingHistory();
+            } catch (error) {
+                document.getElementById('adminMessages').innerHTML =
+                    `<div class="error">Training failed: ${escapeHtml(error.message)}</div>`;
+                showToast('Training failed', 'error');
+            }
+        }
+
+        async function generateTestData() {
+            if (!confirm(`Generate ${TEST_INTERACTION_COUNT} random test interactions? This will create sample data for testing.`)) return;
+
+            document.getElementById('adminMessages').innerHTML =
+                '<div class="info">Generating test data... Please wait...</div>';
+
+            try {
+                const [usersResponse, itemsResponse] = await Promise.all([
+                    fetch(`${API_URL}/users/`),
+                    fetch(`${API_URL}/items/`)
+                ]);
+
+                const users = await usersResponse.json();
+                const items = await itemsResponse.json();
+
+                if (users.length === 0 || items.length === 0) throw new Error('Need at least one user and one item');
+
+                const types = ['view', 'click', 'purchase', 'like'];
+                let successCount = 0;
+
+                for (let i = 0; i < TEST_INTERACTION_COUNT; i++) {
+                    const user = users[Math.floor(Math.random() * users.length)];
+                    const item = items[Math.floor(Math.random() * items.length)];
+                    const type = types[Math.floor(Math.random() * types.length)];
+                    const rating = Math.random() * 4 + 1;
+
+                    try {
+                        const response = await fetch(`${API_URL}/interactions/`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                user_id: user.id,
+                                item_id: item.id,
+                                interaction_type: type,
+                                rating: rating
+                            })
+                        });
+                        if (response.ok) successCount++;
+                    } catch (error) {
+                        console.error('Error creating interaction:', error);
+                    }
+                }
+
+                document.getElementById('adminMessages').innerHTML =
+                    `<div class="success">Generated ${successCount} test interactions successfully!</div>`;
+                showToast(`Generated ${successCount} test interactions`, 'success');
+            } catch (error) {
+                console.error('Error generating test data:', error);
+                document.getElementById('adminMessages').innerHTML =
+                    `<div class="error">Failed to generate test data: ${escapeHtml(error.message)}</div>`;
+                showToast('Failed to generate test data', 'error');
+            }
+        }
+
+        async function clearCache() {
+            if (!confirm('Clear all cached data? This will force fresh data loading.')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/cache/clear/`, { method: 'POST' });
+                if (response.ok) {
+                    showToast('Cache cleared successfully', 'success');
+                    document.getElementById('adminMessages').innerHTML =
+                        '<div class="success">Cache cleared successfully!</div>';
+                } else {
+                    showToast('Failed to clear cache', 'error');
+                }
+            } catch (error) {
+                console.error('Error clearing cache:', error);
+                showToast('Failed to clear cache', 'error');
+            }
+        }
+
+        async function exportData() {
+            try {
+                const [users, items, interactions] = await Promise.all([
+                    fetch(`${API_URL}/users/`).then(r => r.json()),
+                    fetch(`${API_URL}/items/`).then(r => r.json()),
+                    fetch(`${API_URL}/interactions/`).then(r => r.json()).catch(() => [])
+                ]);
+
+                const exportData = {
+                    export_date: new Date().toISOString(),
+                    statistics: {
+                        total_users: users.length,
+                        total_items: items.length,
+                        total_interactions: interactions.length
+                    },
+                    users: users,
+                    items: items.slice(0, 10),
+                    interactions: interactions.slice(0, 20)
+                };
+
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+                const exportFileDefaultName = `recommendation_data_${Date.now()}.json`;
+
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+
+                showToast('Data exported successfully', 'success');
+            } catch (error) {
+                console.error('Error exporting data:', error);
+                showToast('Failed to export data', 'error');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+            }
+        });
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

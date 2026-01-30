@@ -1,0 +1,32 @@
+# production_config.yaml
+models:
+  two_tower:
+    version: "v2.3.1"
+    serving_percentage: 60
+    fallback: "collaborative_filtering"
+  
+  transformer:
+    version: "v1.2.0"
+    serving_percentage: 30
+    fallback: "two_tower"
+  
+  experimental:
+    version: "v3.0.0-beta"
+    serving_percentage: 10
+    fallback: "two_tower"
+
+infrastructure:
+  redis:
+    cluster_endpoints: ["redis-1:6379", "redis-2:6379"]
+    ttl: 300
+  
+  model_serving:
+    replicas: 3
+    gpu_enabled: true
+    batch_size: 128
+    
+monitoring:
+  sla_targets:
+    p50_latency: 50ms
+    p99_latency: 200ms
+    error_rate: 0.001

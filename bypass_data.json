@@ -1,0 +1,699 @@
+[
+    {
+      "objectID": "677714e8aeab796c9f80260d",
+      "productId": "677714e8aeab796c9f80260d",
+      "buyPassId": "CGD7L",
+      "subProductId": "677714e8aeab796c9f80260e",
+      "productImage": "https://assets-opt.buypass.ai/compressed/88e15130-9ffd-4fc9-bd9e-c078041229aa.JPG",
+      "productImages": [
+        "https://assets.buypass.ai/uploads/vendor/1a43baf7-d53d-4370-94f4-c27f190a3881.JPG",
+        "https://assets.buypass.ai/uploads/vendor/5e0d5108-caac-4e9e-a090-d20da12d556c.JPG"
+      ],
+      "productName": "Lyxana  Long Dress With Bow Tie Black And White ",
+      "productPrice": 10000,
+      "productSalePrice": 10000,
+      "filterData": {
+        "routingType": "productdetail",
+        "filterQuery": "?productId=677714e8aeab796c9f80260d"
+      },
+      "categoryId": "673f3f526525a462f78d85c2",
+      "categoryName": "Dresses",
+      "category": {
+        "_id": "673f3f526525a462f78d85c2",
+        "name": "Dresses",
+        "cateogryPath": [
+          "Fashion",
+          "Women",
+          "Clothing",
+          "Dresses"
+        ],
+        "cateogryIdPath": [
+          "673f3f4f6525a462f78d85bf",
+          "673f3f506525a462f78d85c0",
+          "673f3f516525a462f78d85c1",
+          "673f3f526525a462f78d85c2"
+        ]
+      },
+      "categoryPath": "Fashion,Women,Clothing,Dresses",
+      "weight": {
+        "value": 0.1,
+        "unit": "kg"
+      },
+      "seller": {
+        "id": "4138197173",
+        "name": "Zee Store",
+        "userName": "muskan",
+        "businessType": "inclusive",
+        "zone": "Clifton",
+        "city": "Karachi",
+        "province": "Sindh",
+        "status": "inactive"
+      },
+      "_geoloc": {
+        "lat": 24.8212312,
+        "lng": 67.0181618
+      },
+      "specifications": [
+        {
+          "key": "Age Range",
+          "value": "19 to 27 Years"
+        },
+        {
+          "key": "Occasion",
+          "value": "Business"
+        },
+        {
+          "key": "Model",
+          "value": "2022"
+        },
+        {
+          "key": "Clothing Style",
+          "value": "Formal"
+        },
+        {
+          "key": "Dress Shape",
+          "value": "Formal Dresses"
+        }
+      ],
+      "stockCount": 12,
+      "soldCount": 0,
+      "viewCount": 48,
+      "variants": [
+        {
+          "type": "Color Family",
+          "subType": "",
+          "value": {
+            "name": "Grey",
+            "images": []
+          }
+        }
+      ],
+      "lastUpdatedTime": 1754097660527,
+      "createdOn": 1735894695824.0,
+      "productFooter": null,
+      "productTotalReviews": 0,
+      "productStatus": "inactive",
+      "productCondition": "New",
+      "productDescription": "<h2>Lyxana Women's V-Neck Cinched Waist Wide Skirt Long Dress With Bow Tie, Black And White Vertical Striped, Long Sleeve Maxi Women Outfit</h2>",
+      "productMainDescription": "<h2>Lyxana Women's V-Neck Cinched Waist Wide Skirt Long Dress With Bow Tie, Black And White Vertical Striped, Long Sleeve Maxi Women Outfit</h2>",
+      "productHeader": "bestseller",
+      "productDiscount": 0,
+      "productDeliveryType": "free",
+      "productRating": 0,
+      "totalSold": 0,
+      "commission": null,
+      "historyId": "688d67fcda76ac809f528d64",
+      "warranty": {
+        "type": "No Warranty",
+        "period": {
+          "value": 0,
+          "unit": ""
+        },
+        "policy": ""
+      },
+      "containDangerousGoods": true
+    },
+    {
+      "objectID": "677715c5aeab796c9f802612",
+      "productId": "677715c5aeab796c9f802612",
+      "buyPassId": "OVGKD",
+      "subProductId": "677715c5aeab796c9f802613",
+      "productImage": "https://assets-opt.buypass.ai/compressed/3ec5c195-d5be-4c07-a4d8-4b21b5d1df61.jpg",
+      "productImages": [
+        "https://assets.buypass.ai/uploads/vendor/2a0655e3-584c-4cf4-a071-e8ce1c904145.jpg"
+      ],
+      "productName": "pixel 9",
+      "productPrice": 170000,
+      "productSalePrice": 170000,
+      "filterData": {
+        "routingType": "productdetail",
+        "filterQuery": "?productId=677715c5aeab796c9f802612"
+      },
+      "categoryId": "673f3d3b6525a462f78d7f7c",
+      "categoryName": "Mobiles",
+      "category": {
+        "_id": "673f3d3b6525a462f78d7f7c",
+        "name": "Mobiles",
+        "cateogryPath": [
+          "Mobiles & Tablets",
+          "Mobiles"
+        ],
+        "cateogryIdPath": [
+          "673f3d3b6525a462f78d7f7b",
+          "673f3d3b6525a462f78d7f7c"
+        ]
+      },
+      "categoryPath": "Mobiles & Tablets,Mobiles",
+      "weight": {
+        "value": 2,
+        "unit": "kg"
+      },
+      "seller": {
+        "id": "3896963349",
+        "name": "sabik shop",
+        "userName": "Sabik Naita",
+        "businessType": "inclusive",
+        "zone": "Clifton",
+        "city": "Karachi",
+        "province": "Sindh",
+        "status": "inactive"
+      },
+      "_geoloc": {
+        "lat": 24.907562925492336,
+        "lng": 66.98847091155807
+      },
+      "specifications": [],
+      "stockCount": 13,
+      "soldCount": 9,
+      "viewCount": 31,
+      "variants": [
+        {
+          "type": "Color Family",
+          "subType": "",
+          "value": {
+            "name": "Black",
+            "images": []
+          }
+        },
+        {
+          "type": "Storage Capacity",
+          "subType": "",
+          "value": {
+            "name": "200GB",
+            "images": []
+          }
+        }
+      ],
+      "lastUpdatedTime": 1754097660527,
+      "createdOn": 1735857605181.0,
+      "productFooter": null,
+      "productTotalReviews": 0,
+      "productStatus": "active",
+      "productCondition": "New",
+      "productDescription": "<p>Product Description</p>",
+      "productMainDescription": "<p>Main Description</p>",
+      "productHeader": "bestseller",
+      "productDiscount": 0,
+      "productDeliveryType": "free",
+      "productRating": 0,
+      "totalSold": 9,
+      "commission": null,
+      "historyId": "688d67fcda76ac809f528d65",
+      "warranty": {
+        "type": "No Warranty",
+        "period": {
+          "value": 0,
+          "unit": ""
+        },
+        "policy": ""
+      },
+      "containDangerousGoods": true
+    },
+    {
+      "objectID": "67771c26aeab796c9f80263d",
+      "productId": "67771c26aeab796c9f80263d",
+      "buyPassId": "2FDPJ",
+      "subProductId": "67771c26aeab796c9f80263e",
+      "productImage": "https://assets-opt.buypass.ai/compressed/d14e7b1d-2e95-49f0-9ae7-9a3670dd87a9.webp",
+      "productImages": [
+        "https://assets.buypass.ai/uploads/vendor/33431c3e-62ac-4fbe-aa95-2860750e6517.webp",
+        "https://assets.buypass.ai/uploads/vendor/2647d0b2-7590-4f3c-97d8-3ce0ddb51d23.webp"
+      ],
+      "productName": "Samsung Galaxy A05s 6128gb",
+      "productPrice": 20000,
+      "productSalePrice": 20000,
+      "filterData": {
+        "routingType": "productdetail",
+        "filterQuery": "?productId=67771c26aeab796c9f80263d"
+      },
+      "categoryId": "673f3d3b6525a462f78d7f7c",
+      "categoryName": "Mobiles",
+      "category": {
+        "_id": "673f3d3b6525a462f78d7f7c",
+        "name": "Mobiles",
+        "cateogryPath": [
+          "Mobiles & Tablets",
+          "Mobiles"
+        ],
+        "cateogryIdPath": [
+          "673f3d3b6525a462f78d7f7b",
+          "673f3d3b6525a462f78d7f7c"
+        ]
+      },
+      "categoryPath": "Mobiles & Tablets,Mobiles",
+      "weight": {
+        "value": 0.2,
+        "unit": "kg"
+      },
+      "seller": {
+        "id": "475644408",
+        "name": "Mobile Bazar",
+        "userName": "wilsom",
+        "businessType": "inclusive",
+        "zone": "Gulshan-e-Iqbal",
+        "city": "Karachi",
+        "province": "Sindh",
+        "status": "inactive"
+      },
+      "_geoloc": {
+        "lat": 24.8662562,
+        "lng": 67.04124639999999
+      },
+      "specifications": [
+        {
+          "key": "Model",
+          "value": "2022"
+        }
+      ],
+      "stockCount": 12,
+      "soldCount": 0,
+      "viewCount": 2,
+      "variants": [
+        {
+          "type": "Color Family",
+          "subType": "",
+          "value": {
+            "name": "Black",
+            "images": []
+          }
+        }
+      ],
+      "lastUpdatedTime": 1754097660527,
+      "createdOn": 1735859238016.0,
+      "productFooter": null,
+      "productTotalReviews": 0,
+      "productStatus": "active",
+      "productCondition": "New",
+      "productDescription": "<ul><li>You got a 6.7 inch FHD display of Samsung Galaxy A05s which makes internet and social media scrolling experience joyable.</li><li>To enhance your photography skills Samsung Galaxy A05s has 50MP main camera which captures details in photos. You can also record High resolution videos as well.</li><li>With Samsung Galaxy A05s you have a faster octa-core processor which performs well from running everyday applications to high quality streaming services.</li></ul><p><br>&nbsp;</p>",
+      "productMainDescription": "<ul><li>You got a 6.7 inch FHD display of Samsung Galaxy A05s which makes internet and social media scrolling experience joyable.</li><li>To enhance your photography skills Samsung Galaxy A05s has 50MP main camera which captures details in photos. You can also record High resolution videos as well.</li><li>With Samsung Galaxy A05s you have a faster octa-core processor which performs well from running everyday applications to high quality streaming services.</li></ul><p><br>&nbsp;</p>",
+      "productHeader": "bestseller",
+      "productDiscount": 0,
+      "productDeliveryType": "free",
+      "productRating": 0,
+      "totalSold": 0,
+      "commission": null,
+      "historyId": "688d67fcda76ac809f528d69",
+      "warranty": {
+        "type": "No Warranty",
+        "period": {
+          "value": 0,
+          "unit": ""
+        },
+        "policy": ""
+      },
+      "containDangerousGoods": true
+    },
+    {
+      "objectID": "6777e4772f7753cecea78756",
+      "productId": "6777e4772f7753cecea78756",
+      "buyPassId": "MNU0N",
+      "subProductId": "6777e4772f7753cecea78757",
+      "productImage": "https://assets-opt.buypass.ai/compressed/6b92bd13-2eb4-4641-824b-99eea100e3db.png",
+      "productImages": [
+        "https://assets.buypass.ai/uploads/vendor/dc31b38a-88d0-4d7f-9372-6229c6eade3f.png"
+      ],
+      "productName": "Nokia",
+      "productPrice": 345,
+      "productSalePrice": 345,
+      "filterData": {
+        "routingType": "productdetail",
+        "filterQuery": "?productId=6777e4772f7753cecea78756"
+      },
+      "categoryId": "673f3e9b6525a462f78d847e",
+      "categoryName": "Makeup Palettes & Sets",
+      "category": {
+        "_id": "673f3e9b6525a462f78d847e",
+        "name": "Makeup Palettes & Sets",
+        "cateogryPath": [
+          "Health & Beauty",
+          "Makeup",
+          "Makeup Palettes & Sets"
+        ],
+        "cateogryIdPath": [
+          "673f3e636525a462f78d840b",
+          "673f3e796525a462f78d8434",
+          "673f3e9b6525a462f78d847e"
+        ]
+      },
+      "categoryPath": "Health & Beauty,Makeup,Makeup Palettes & Sets",
+      "weight": {
+        "value": 0.01,
+        "unit": "kg"
+      },
+      "seller": {
+        "id": "3718728739",
+        "name": "Wajid Kings Traders ",
+        "userName": "Wajid",
+        "businessType": "inclusive",
+        "zone": "Gulshan-e-Ravi",
+        "city": "Lahore",
+        "province": "Punjab",
+        "status": "inactive"
+      },
+      "_geoloc": {
+        "lat": 31.46556948754317,
+        "lng": 74.07964752239212
+      },
+      "specifications": [
+        {
+          "key": "Model",
+          "value": "00900"
+        },
+        {
+          "key": "Color Family",
+          "value": "Black"
+        },
+        {
+          "key": "Vegan",
+          "value": "Yes"
+        },
+        {
+          "key": "Country of origin",
+          "value": "Philippines"
+        },
+        {
+          "key": "Brand Classification",
+          "value": "Premium"
+        },
+        {
+          "key": "Beauty Features",
+          "value": "beautiful "
+        },
+        {
+          "key": "Hair Type",
+          "value": "hi"
+        },
+        {
+          "key": "Health Format",
+          "value": "skin care"
+        },
+        {
+          "key": "Volume (ml)",
+          "value": "1.2 L"
+        },
+        {
+          "key": "Pack Type",
+          "value": "Single Item"
+        },
+        {
+          "key": "Capacity Slices",
+          "value": "1"
+        },
+        {
+          "key": "Health Features",
+          "value": "good"
+        },
+        {
+          "key": "Express_delivery",
+          "value": "Lahore"
+        },
+        {
+          "key": "Storage Requirements",
+          "value": "Refrigerated"
+        },
+        {
+          "key": "weight",
+          "value": "350 g"
+        },
+        {
+          "key": "Shelf Life",
+          "value": "Not Specified"
+        },
+        {
+          "key": "Pack Size",
+          "value": "<p>okay</p>"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "Bhutan"
+        }
+      ],
+      "stockCount": 0,
+      "soldCount": 0,
+      "viewCount": 0,
+      "variants": [],
+      "lastUpdatedTime": 1750975463385,
+      "createdOn": 1735910519103.0,
+      "productFooter": null,
+      "productTotalReviews": 0,
+      "productStatus": "pending",
+      "productCondition": "New",
+      "productDescription": "<figure class=\"image\"><img style=\"aspect-ratio:793/727;\" src=\"https://firebasestorage.googleapis.com/v0/b/market-place-299a6.appspot.com/o/product%2F1735910494772Screenshot%202025-01-03%20174626.png?alt=media&amp;token=9180e64e-3cde-4bac-bd8a-3d7fa0112739\" width=\"793\" height=\"727\"></figure>",
+      "productMainDescription": "",
+      "productHeader": "bestseller",
+      "productDiscount": 0,
+      "productDeliveryType": "free",
+      "productRating": 0,
+      "totalSold": 0,
+      "commission": null,
+      "historyId": "685dd8bdf5a1ba91197f28ee",
+      "warranty": {
+        "type": "No Warranty",
+        "period": {
+          "value": 0,
+          "unit": ""
+        },
+        "policy": ""
+      },
+      "containDangerousGoods": true
+    },
+    {
+      "objectID": "677b672902e12cc894ebdd7f",
+      "productId": "677b672902e12cc894ebdd7f",
+      "buyPassId": "MSZJX",
+      "subProductId": "677b672902e12cc894ebdd80",
+      "productImage": "https://assets-opt.buypass.ai/compressed/5faf02a3-cfd3-4e7f-a7eb-7521e802b383.jpg",
+      "productImages": [
+        "https://assets.buypass.ai/uploads/vendor/f49de29c-7b84-49e7-966e-267785f01468.jpg"
+      ],
+      "productName": "Test product",
+      "productPrice": 300,
+      "productSalePrice": 300,
+      "filterData": {
+        "routingType": "productdetail",
+        "filterQuery": "?productId=677b672902e12cc894ebdd7f"
+      },
+      "categoryId": "673f3d836525a462f78d80e1",
+      "categoryName": "In-Ear Headphones",
+      "category": {
+        "_id": "673f3d836525a462f78d80e1",
+        "name": "In-Ear Headphones",
+        "cateogryPath": [
+          "TV, Audio, Video, Gaming & Wearables",
+          "Audio",
+          "Headphones & Headsets",
+          "In-Ear Headphones"
+        ],
+        "cateogryIdPath": [
+          "673f3d7c6525a462f78d80bb",
+          "673f3d806525a462f78d80ce",
+          "673f3d836525a462f78d80e0",
+          "673f3d836525a462f78d80e1"
+        ]
+      },
+      "categoryPath": "TV, Audio, Video, Gaming & Wearables,Audio,Headphones & Headsets,In-Ear Headphones",
+      "weight": {
+        "value": 0.3,
+        "unit": "kg"
+      },
+      "seller": {
+        "id": "3157639687",
+        "name": "Ali test",
+        "userName": "Ali Khan",
+        "businessType": "inclusive",
+        "zone": "Nazimabad",
+        "city": "Karachi",
+        "province": "Sindh",
+        "status": "inactive"
+      },
+      "_geoloc": {
+        "lat": 24.84174120157737,
+        "lng": 67.35702869010231
+      },
+      "specifications": [
+        {
+          "key": "Model",
+          "value": "Model,Without Model"
+        },
+        {
+          "key": "Cable Length",
+          "value": "Not Specified"
+        },
+        {
+          "key": "Headphone Features",
+          "value": "Water Resistant,Studio,Built in Microphone"
+        },
+        {
+          "key": "Bluetooth",
+          "value": "No"
+        },
+        {
+          "key": "Compatible Operating System",
+          "value": "Android"
+        },
+        {
+          "key": "Express_delivery",
+          "value": "Karachi"
+        },
+        {
+          "key": "Wearing Type",
+          "value": "In-Ear"
+        },
+        {
+          "key": "Wireless Type",
+          "value": "Bluetooth"
+        },
+        {
+          "key": "Condition",
+          "value": "Brand New"
+        },
+        {
+          "key": "Display Resolution",
+          "value": "-"
+        },
+        {
+          "key": "Electronics Features",
+          "value": "-"
+        },
+        {
+          "key": "Energy Rating",
+          "value": "-"
+        },
+        {
+          "key": "Refresh Rate",
+          "value": "-"
+        },
+        {
+          "key": "Required Serial",
+          "value": "-"
+        },
+        {
+          "key": "Speakers Config",
+          "value": "-"
+        }
+      ],
+      "stockCount": 20,
+      "soldCount": 0,
+      "viewCount": 0,
+      "variants": [
+        {
+          "type": "Color Family",
+          "subType": "",
+          "value": {
+            "name": "Black",
+            "images": []
+          }
+        }
+      ],
+      "lastUpdatedTime": 1750975430128,
+      "createdOn": 1736140585398.0,
+      "productFooter": null,
+      "productTotalReviews": 0,
+      "productStatus": "pending",
+      "productCondition": "New",
+      "productDescription": "<p>xyz</p>",
+      "productMainDescription": "<p>xyz</p>",
+      "productHeader": "bestseller",
+      "productDiscount": 0,
+      "productDeliveryType": "free",
+      "productRating": 0,
+      "totalSold": 0,
+      "commission": null,
+      "historyId": "685dd8bdf5a1ba91197f28b5",
+      "warranty": {
+        "type": "No Warranty",
+        "period": {
+          "value": 0,
+          "unit": ""
+        },
+        "policy": ""
+      },
+      "containDangerousGoods": false
+    },
+    {
+      "objectID": "679762a59f1efc1309a1bba6",
+      "productId": "679762a59f1efc1309a1bba6",
+      "buyPassId": "6SJ5W",
+      "subProductId": "679762a59f1efc1309a1bba7",
+      "productImage": "https://assets-opt.buypass.ai/compressed/26032cd8-5942-4bc2-9c0d-672749e476a8.jpg",
+      "productImages": [
+        "https://assets.buypass.ai/uploads/vendor/7b56ee91-7d2f-4879-abfd-21f99b29ede1.jpg"
+      ],
+      "productName": "Green grass wall stickers",
+      "productPrice": 499,
+      "productSalePrice": 499,
+      "filterData": {
+        "routingType": "productdetail",
+        "filterQuery": "?productId=679762a59f1efc1309a1bba6"
+      },
+      "categoryId": "673f43106525a462f78d95e6",
+      "categoryName": "Wall Stickers & Decals",
+      "category": {
+        "_id": "673f43106525a462f78d95e6",
+        "name": "Wall Stickers & Decals",
+        "cateogryPath": [
+          "Furniture & Decor",
+          "Home Decor",
+          "Wall Stickers & Decals"
+        ],
+        "cateogryIdPath": [
+          "673f43066525a462f78d95bd",
+          "673f430a6525a462f78d95cd",
+          "673f43106525a462f78d95e6"
+        ]
+      },
+      "categoryPath": "Furniture & Decor,Home Decor,Wall Stickers & Decals",
+      "weight": {
+        "value": 0.001,
+        "unit": "kg"
+      },
+      "seller": {
+        "id": "2988394244",
+        "name": "Akiamore",
+        "userName": "adnan saeed siddiqui",
+        "businessType": "inclusive",
+        "zone": "Korangi",
+        "city": "Karachi",
+        "province": "Sindh",
+        "status": "active"
+      },
+      "_geoloc": {
+        "lat": 24.8256125,
+        "lng": 67.13907809999999
+      },
+      "specifications": [
+        {
+          "key": "Model",
+          "value": "Xl7180"
+        }
+      ],
+      "stockCount": 99,
+      "soldCount": 0,
+      "viewCount": 4,
+      "variants": [],
+      "lastUpdatedTime": 1754097660527,
+      "createdOn": 1737974437472.0,
+      "productFooter": null,
+      "productTotalReviews": 0,
+      "productStatus": "active",
+      "productCondition": "New",
+      "productDescription": "<p>Size 60 by 90 cm</p>",
+      "productMainDescription": "<p>Size 60 by 90 cm</p>",
+      "productHeader": "bestseller",
+      "productDiscount": 0,
+      "productDeliveryType": "free",
+      "productRating": 0,
+      "totalSold": 0,
+      "commission": null,
+      "historyId": "688d67fcda76ac809f528d6e",
+      "warranty": {
+        "type": "No Warranty",
+        "period": {
+          "value": 0,
+          "unit": ""
+        },
+        "policy": ""
+      },
+      "containDangerousGoods": false
+    }
+  ]

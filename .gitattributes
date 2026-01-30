@@ -1,0 +1,53 @@
+# Normalize line endings and avoid noisy warnings
+
+# Auto-detect text files and normalize line endings in the repo to LF
+* text=auto
+
+# Default LF for source and data files
+*.py    text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.csv   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.ini   text eol=lf
+*.cfg   text eol=lf
+*.toml  text eol=lf
+*.sql   text eol=lf
+*.html  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.ts    text eol=lf
+*.sh    text eol=lf
+*.ipynb text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+
+# Keep Windows scripts with CRLF
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+*.psm1  text eol=crlf
+*.psd1  text eol=crlf
+
+# Treat binaries as binary (no EOL conversion)
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
+*.pkl    binary
+*.pt     binary
+*.pth    binary
+*.faiss  binary
+*.docx   binary
+*.db     binary
+*.sqlite binary
+*.so     binary
+*.dll    binary
+*.exe    binary
+*.zip    binary
+*.gz     binary
+*.tar    binary
+*.7z     binary

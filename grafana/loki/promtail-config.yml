@@ -1,0 +1,20 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  # Using the Private IP to ensure the connection works across projects
+  - url: http://172.31.19.251:3001/loki/api/v1/push
+
+scrape_configs:
+  - job_name: docker_logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: container_logs
+          # This wildcard path finds every container log file
+          __path__: /var/lib/docker/containers/*/*.log

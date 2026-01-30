@@ -1,0 +1,16 @@
+# Grafana Dashboard Provisioning
+# Auto-loads dashboards from the dashboards folder
+
+apiVersion: 1
+
+providers:
+  - name: 'Recommendation Engine'
+    orgId: 1
+    folder: 'Rec Engine'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

@@ -1,0 +1,29 @@
+services:
+  # Loki: The "Database" for logs
+  loki:
+    image: grafana/loki:2.9.4
+    ports:
+      - "3001:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  # Promtail: The "Agent" that sends logs to Loki
+# Promtail: The "Agent" that sends logs to Loki
+  promtail:
+    image: grafana/promtail:2.9.4
+    container_name: loki-promtail-1
+    user: root  # Required to read /var/lib/docker/containers and the socket
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # CRITICAL: Connects Promtail to Docker
+      - ./promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - rec_engine_net      
+# =========================
+# Network
+# =========================
+networks:
+  rec_engine_net:
+    driver: bridge
+
+      
