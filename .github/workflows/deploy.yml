@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - fix/grafana-dashboard
-
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
