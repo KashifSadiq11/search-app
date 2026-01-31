@@ -34,7 +34,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ kashifsadiq }}/rec-engine-api:latest
+            kashifsadiq/rec-engine-api:latest
 
       # =========================
       # SSH Deploy
