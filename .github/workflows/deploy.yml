@@ -20,19 +20,18 @@ jobs:
       # =========================
       # Debug: Verify secrets are available
       # =========================
-      - name: Debug Docker secrets
-        run: |
-          echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}"
-          echo "DOCKER_PASSWORD length=${{ secrets.DOCKER_PASSWORD }}" # just length, not actual password
+     # - name: Debug Docker secrets
+       # run: |
+       #   echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}"
+        #  echo "DOCKER_PASSWORD length=${{ secrets.DOCKER_PASSWORD }}" # just length, not actual password
 
       # =========================
-      # Docker login
-      # =========================
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      #- name: Log in to Docker Hub
+                if: success()
+                uses: docker/login-action@v2
+                with:
+                   username: ${{ secrets.DOCKER_USERNAME }}
+                   password: ${{ secrets.DOCKER_PASSWORD }}
 
       # =========================
       # Build & push Docker image
