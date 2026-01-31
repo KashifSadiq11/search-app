@@ -1,6 +1,9 @@
-#stage 1: Builder
+# ------------------------------
+# Stage 1: Builder (install deps)
+# ------------------------------
 FROM python:3.11-slim AS builder
 
+# Python environment settings
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
@@ -15,7 +18,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     wget \
     curl \
-    libgomp1 \
     libpq-dev \
     ffmpeg \
     libsm6 \
@@ -24,26 +26,30 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy only requirements for caching
+# Copy only requirements first for caching
 COPY services/engine/requirements.txt /tmp/requirements.txt
+
+# Fix psycopg2 naming if needed
 RUN sed -i "s/psycopg2_binary/psycopg2-binary/g" /tmp/requirements.txt || true
 
-# Install Python dependencies into a dedicated directory
+# Install Python dependencies into /install
 RUN pip install --upgrade pip && \
-    pip install --prefix=/install -r /tmp/requirements.txt
+    pip install --prefix=/install --extra-index-url https://download.pytorch.org/whl/cpu -r /tmp/requirements.txt
 
-# Stage 2: Final runtime image
+# ------------------------------
+# Stage 2: Runtime image
+# ------------------------------
 FROM python:3.11-slim
 
+# Python environment
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
     APP_HOST=0.0.0.0 \
     APP_PORT=8000
 
 WORKDIR /app
 
-# Install only runtime dependencies
+# Install runtime dependencies only
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     libsm6 \
@@ -53,15 +59,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy Python dependencies from builder
+# Copy Python packages from builder
 COPY --from=builder /install /usr/local
 
 # Copy application code
 COPY . /app
 
+# Copy .env for environment variables
+COPY .env /app/.env
+
+# Set working directory where main.py lives
 WORKDIR /app/services/engine
 
+# Expose FastAPI port
 EXPOSE 8000
 
-CMD ["sh", "-c", "uvicorn main:app --host ${APP_HOST} --port ${APP_PORT} --proxy-headers --forwarded-allow-ips=*"]
-
+# Start FastAPI
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--forwarded-allow-ips=*"]
