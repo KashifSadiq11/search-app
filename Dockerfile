@@ -66,7 +66,7 @@ COPY --from=builder /install /usr/local
 COPY . /app
 
 # Copy .env for environment variables
-COPY .env /app/.env
+#COPY .env /app/.env
 
 # Set working directory where main.py lives
 WORKDIR /app/services/engine
