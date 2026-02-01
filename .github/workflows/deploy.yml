@@ -38,7 +38,7 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/rec-engine-api:latest
 
       # =========================
-      # SSH Deploy
+      # SSH Deploy to EC2
       # =========================
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.0
@@ -47,8 +47,24 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/rec-engine
-            git pull
+            echo "=== Navigating to project directory ==="
+            cd ~/rec-engine || { echo "Directory ~/rec-engine not found!"; exit 1; }
+            
+            echo "=== Pulling latest code ==="
+            git pull origin master
+            
+            echo "=== Pulling latest Docker images ==="
             docker compose pull
+            
+            echo "=== Stopping old containers ==="
+            docker compose down
+            
+            echo "=== Starting new containers ==="
             docker compose up -d --build
+            
+            echo "=== Cleaning up old images ==="
             docker image prune -f
+            
+            echo "=== Checking running containers ==="
+            docker compose ps
+            docker ps -a
