@@ -23,8 +23,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       # =========================
       # Build & push Docker image
@@ -35,12 +35,12 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/rec-engine-api:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME  }}/rec-engine-api:latest
 
       # =========================
       # Optional: Run container on runner for test
       # =========================
       - name: Test run container (optional)
         run: |
-          docker run --rm --env CURRENT_ENVIRONMENT=development \
-            ${{ secrets.DOCKER_USERNAME }}/rec-engine-api:latest
+          docker run --rm --env CURRENT_ENVIRONMENT=production \
+            ${{ secrets.DOCKER_HUB_USERNAME  }}/rec-engine-api:latest
