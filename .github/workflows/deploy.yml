@@ -1,8 +1,6 @@
-name: Docker CI/CD
-
 on:
   push:
-    branches: [ "main" ] # Runs whenever you push to main
+    branches: [ "main" ]
 
 jobs:
   build-and-push:
@@ -11,35 +9,34 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 1. Setup Buildx (The "Industrial Oven" for fast builds)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 2. Login to Docker Hub using GitHub Secrets
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 3. Extract metadata (Tags your image with 'latest' AND the git commit SHA)
+      # 3. Extract metadata (Finished this block for you)
       - name: Extract Metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/your-repo-name
+          # Replace 'your-dockerhub-repo' with your actual repository name
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/your-dockerhub-repo
           tags: |
             type=raw,value=latest
             type=sha,format=short
 
-      # 4. Build and Push with Caching
+      # 4. Build and Push (The final step that uses the metadata)
       - name: Build and Push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ id.meta.outputs.tags }}
-          labels: ${{ id.meta.outputs.labels }}
-          # This saves your layers in GitHub's cache to speed up the next run
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Enables GitHub Actions caching to make subsequent builds faster
           cache-from: type=gha
           cache-to: type=gha,mode=max
