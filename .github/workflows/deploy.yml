@@ -18,48 +18,31 @@ jobs:
         uses: actions/checkout@v4
 
       # =========================
-      # Debug: Check if secrets exist
-      # =========================
-      - name: Verify secrets are available
-        run: |
-          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
-            echo "ERROR: DOCKER_USERNAME is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
-            echo "ERROR: DOCKER_PASSWORD is not set"
-            exit 1
-          fi
-          echo "Secrets are available"
-          echo "Username length: ${#DOCKER_USERNAME}"
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-
-      # =========================
       # Setup Docker Buildx
       # =========================
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       # =========================
-      # Docker login - Method 1
+      # Docker login using environment variables
       # =========================
       - name: Login to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
 
       # =========================
       # Build + Push API Image
       # =========================
       - name: Build and push API image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/rec-engine-api:latest
-            ${{ secrets.DOCKER_USERNAME }}/rec-engine-api:${{ github.sha }}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          docker build -t ${DOCKER_USERNAME}/rec-engine-api:latest -t ${DOCKER_USERNAME}/rec-engine-api:${{ github.sha }} .
+          docker push ${DOCKER_USERNAME}/rec-engine-api:latest
+          docker push ${DOCKER_USERNAME}/rec-engine-api:${{ github.sha }}
 
       # =========================
       # SSH Deploy to EC2
