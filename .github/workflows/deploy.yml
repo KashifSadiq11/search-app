@@ -48,7 +48,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "=== Navigating to project directory ==="
-            cd ~/rec-engine || { echo "Directory ~/rec-engine not found!"; exit 1; }
+            cd ~/search-app || { echo "Directory ~/search-app not found!"; exit 1; }
             
             echo "=== Pulling latest code ==="
             git pull origin master
