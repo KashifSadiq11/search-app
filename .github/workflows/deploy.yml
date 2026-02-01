@@ -26,7 +26,7 @@ jobs:
           # Replace 'your-dockerhub-repo' with your actual repository name
           images: ${{ secrets.DOCKERHUB_USERNAME }}/your-dockerhub-repo
           tags: |
-            type=raw,value=latest
+            type=raw,value=latestt
             type=sha,format=short
 
       # 4. Build and Push (The final step that uses the metadata)
