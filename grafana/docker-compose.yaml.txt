@@ -1,0 +1,28 @@
+ubuntu@ip-172-31-19-251:~/rec-engine/grafana/loki$ cat docker-compose.yml
+services:
+  # Loki: The "Database" for logs
+  loki:
+    image: grafana/loki:2.9.4
+    container_name: loki-1
+    ports:
+      - "3001:3100"  # 3001 on host → 3100 in container
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - rec_engine_net
+
+  # Promtail: The "Agent" that sends logs to Loki
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail-1
+    user: root  # Required to read Docker logs and socket
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./promtail-config.yaml:/etc/promtail/config.yaml
+    command: -config.file=/etc/promtail/config.yaml
+    networks:
+      - rec_engine_net
+
+networks:
+  rec_engine_net:
+    driver: bridge
