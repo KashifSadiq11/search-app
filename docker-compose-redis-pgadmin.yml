@@ -1,0 +1,29 @@
+redis-ui:
+  image: redis/redisinsight:latest
+  container_name: redis-ui
+  ports:
+    - "8001:5540"
+  environment:
+    - REDISINSIGHT_BIND_ADDRESS=0.0.0.0
+  volumes:
+    - redisinsight-data:/db   # persistent data
+  restart: unless-stopped
+
+volumes:
+  redisinsight-data:
+
+
+pgadmin:
+  image: dpage/pgadmin4:7.7
+  container_name: pgadmin
+  environment:
+    PGADMIN_DEFAULT_EMAIL: "admin@example.com"
+    PGADMIN_DEFAULT_PASSWORD: "password"
+  ports:
+    - "8080:80"
+  volumes:
+    - pgadmin-data:/var/lib/pgadmin  # persistent storage
+  restart: unless-stopped
+
+volumes:
+  pgadmin-data:
