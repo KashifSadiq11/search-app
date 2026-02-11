@@ -27,3 +27,18 @@ pgadmin:
 
 volumes:
   pgadmin-data:
+
+
+    # Add Ollama container
+ollama:
+  image: ollama/ollama:latest
+  container_name: rec_engine_ollama
+  ports:
+     - "11435:11434"
+  volumes:
+     - ollama_data:/root/.ollama
+  restart: unless-stopped
+
+volumes:
+  - ollama_data:
+      - rec_engine_net
