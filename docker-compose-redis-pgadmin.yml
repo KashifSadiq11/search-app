@@ -38,7 +38,56 @@ ollama:
   volumes:
      - ollama_data:/root/.ollama
   restart: unless-stopped
+  networks:
+      - rec_engine_net
 
 volumes:
   - ollama_data:
+
+
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    restart: unless-stopped
+    expose:
+      - "9100"
+    volumes:
+      - /:/host:ro,rslave
+    command:
+      - '--path.rootfs=/host'
+
+    networks:
       - rec_engine_net
+
+
+
+# =========================
+  # Prometheus
+  # =========================
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: rec_engine_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alerts:/etc/prometheus/alerts:ro
+      - prometheus_data:/prometheus
+        # - /mnt/docker-data/prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+      - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.size=60GB'
+    restart: unless-stopped
+    depends_on:
+      - api
+    networks:
+      - rec_engine_net
+
+
+      
